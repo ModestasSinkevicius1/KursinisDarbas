@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                background-color: #692121;
+                background-repeat: no-repeat;
+                background-size:cover;
+                height: 29em;   
+                font-family: Arial, Helvetica, sans-serif;            
+            }
+            div{
+                color: white;                        
+                background-color: rgb(148, 14, 14);
+                border: solid #3b0707;
+                border-radius: 10pt;
+                margin-right:auto;
+                margin-left:auto;            
+                width:350pt;
+                padding: 50pt;
+                padding-bottom:10pt;
+                padding-top:10pt;
+                text-align: center;
+                margin-top: 2em;                           
+            }
+            .btn{
+                width:100pt;
+            }
+            a, a:hover, a:active{
+                color:black;
+                text-decoration:none;
+            }
+            .label{
+                text-align: left;			
+            }
+            #input,#input-date,#input-textarea{
+                padding: 2pt;
+                padding-right:90pt;
+                padding-leftt:90pt;
+                border-radius:5pt;
+                margin-bottom:5pt;            
+            }
+            #input-date{
+                padding-right:150pt;
+                border-radius:5pt;
+                margin-bottom:5pt;
+            }
+            #input-textarea{
+                resize:none;
+            }
+			#input-combo-1{
+				padding: 5pt;
+                padding-right: 133pt;
+                border-radius: 5pt;
+                margin-bottom:5pt;              				
+			}
+			#input-combo{
+				padding: 5pt;                
+                padding-right: 210pt;
+                border-radius: 5pt;
+                margin-bottom:5pt;				
+			}
+			#input-combo-2{
+				padding: 5pt;                
+                padding-right: 186pt;
+                border-radius: 5pt;
+                margin-bottom:5pt;				
+            }
+            #back-btn{
+                background-color:white;                
+                border-radius:5pt;
+                margin:10pt 0 0 10pt;
+                width:85pt;
+                padding:2pt;
+                text-align:center;
+                font-size:16pt;
+            }    
+        </style>
+		<script>
+			function myFunction(){
+				var element = document.getElementById("input-combo-1");
+				if (element.value == "Destytojas"){
+					document.getElementById("input-combo").style.display="none";
+					document.getElementById("input-combo-2").style.display="none";
+					document.getElementById("program-input").style.display="inline";
+					
+					document.getElementById("course-label").style.display = "none";
+					document.getElementById("group-label").style.display = "none";
+					document.getElementById("program-label").style.display = "block";
+				}
+				if (element.value == "Studentas"){
+					document.getElementById("input-combo").style.display="inline";
+					document.getElementById("input-combo-2").style.display="inline";
+					document.getElementById("program-input").style.display="inline";
+					
+					document.getElementById("course-label").style.display = "block";
+					document.getElementById("group-label").style.display = "block";
+					document.getElementById("program-label").style.display = "block";
+				}
+				
+				if (element.value == "Administratorius"){
+					document.getElementById("input-combo").style.display="none";
+					document.getElementById("input-combo-2").style.display="none";
+					document.getElementById("program-input").style.display="none";
+					
+					document.getElementById("course-label").style.display = "none";
+					document.getElementById("group-label").style.display = "none";
+					document.getElementById("program-label").style.display = "none";
+				}
+			}
+		</script>
+    </head>
+    <body>
+         <h1 id="back-btn"><%=link_to "Atgal", session[:back_home]%></h1>
+         <div>
+			<h1>Registracija</h1>
+             <form action = "/admin/registruoti" method="POST">
+				 <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                 <p class="label">Role:</p>
+                 <select id="input-combo-1" name="role" onchange="myFunction()">
+					<option value="Studentas">Studentas</option>
+					<option value="Destytojas">Destytojas</option>
+					<option value="Administratorius">Administratorius</option>				
+				 </select>             
+                 <br>
+                 <p class="label">Vardas:</p>
+                 <input type="text" id="input" name="user[name]">
+                 <br>
+                 <p class="label">Pavarde:</p>
+                 <input type="text" id="input" name="user[surname]">
+                 <br>
+				 <p class="label">Telefono numeris:</p>
+                 <input type="text" id="input" name="user[phone]">
+                 <br>
+				 <p class="label" id="program-label">Programa:</p>
+                 <input type="text" id="input" name="user[program]">
+                 <br>
+				 <p class="label" id="course-label">Kursas:</p>
+				 <select id="input-combo" name="user[course]">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				 </select>				            
+                 <br>
+				 <p class="label" id="group-label">Grupe:</p>
+                 <select id="input-combo-2" name="user[group]">
+					<option value="PI17B">PI17B</option>
+					<option value="K16S">K16S</option>
+					<option value="PI16C">PI16C</option>
+					<option value="IS17B">IS17B</option>
+				 </select>				            
+                 <br>
+                 <br>
+                 <input type="submit" value="Kitas" class="btn">                 
+                 
+             </form>
+         </div>     
+    </body>
+</html>

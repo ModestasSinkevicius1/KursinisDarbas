@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 95%;              				
+            }
+            #top-board{           
+                border-radius: 5pt;
+                padding:2pt;
+                padding:0 5pt 0 5pt;                              
+            }
+            .btn, .user,#stuff, #btn-side{
+				font-size:16pt;
+            }
+            a, a:hover, a:active{
+                color:black;
+                text-decoration:none;
+            }
+            .btn-3, .btn, .btn-send{
+                background-color: white;                
+                border-radius: 5pt;
+                width: 100pt;
+                min-width:100pt;              
+                text-align: center;
+                padding:1pt;						
+            }
+            #middle-board-btn, #middle-board-btn-1{
+                background-color: white;
+                display:inline-block;
+                width:100pt;
+                font-size:16pt;
+                text-align:center;
+                border-radius: 5pt;
+                padding:4pt;               
+            }
+            .user{				
+                margin:5pt;                                         
+                color:white;
+                margin-bottom:0;
+			}
+            
+            #middle-board{
+                border-radius:5pt;
+                background-color: #436db0;
+                padding:5pt;
+                                                
+            }
+            #middle-board-2{
+                border-radius:5pt;
+                background-color: #436db0;
+                padding: 5pt;
+                margin-bottom: 10pt;
+            }
+            #middle-board-3{
+                border-radius:5pt;
+                background-color: #436db0;
+                padding: 5pt;
+                margin-bottom: 50pt;
+            }
+            nav{                
+                flex:1;
+                margin-right:5pt;
+            }
+            aside{                
+                padding: 2pt;
+                flex:2;                
+            }
+            aside div{                
+                display: flex;
+                flex:1;                                            
+            }
+            .info-box{
+                background-color: white;
+                border-radius: 5pt;
+                padding:3pt;
+            }        
+                       
+            #bottom-board{                
+                display: block;
+                position: fixed;
+                bottom: 0;               
+                text-align: center;
+                width: 100%;
+                padding: 5pt;
+                left:0;                              
+                color: white;
+                font-size: 14pt;           
+            }
+			
+			#btn-side{
+				background-color:white;
+				border-radius:5pt;				
+				text-align:center;
+				padding:2pt;	
+				color:black;
+            }
+            header{           
+                text-align: center;              
+                padding: 5pt;
+            }  
+            #top-board, #bottom-board, aside div, aside, nav{
+                background-color: #436db0;
+            }
+            #stuff-name{
+                color:white;                               
+                text-transform: uppercase;                        
+            }
+            .btn:hover{
+                background-color:lightgray;
+            }
+            h3{
+                font-size:14pt;
+            }
+            #middle-board-2 h1, #middle-board-3 h1{
+                font-size:24pt;
+            }
+            #top-board-content{
+                text-align:right;
+            }
+            #middle-board-content{                              
+                text-align:right;                             
+            }
+            #middle-board-content-1{               
+                text-align:left;               
+            }            
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1 class="removelink"><%=link_to "STUDENTŲ ŽINIOS", dalykai_dalykai_destytojas_path%></h1>
+        </header>        
+        <div id="top-board" class="row">
+            <div class="col-md-6 col-xs-12">
+                               
+            </div>
+            <div id="top-board-content" class="col-md-6 col-xs-12">				
+                <h1 class="user"><%=Destytojas.find(session[:role_id]).name%> <%=Destytojas.find(session[:role_id]).surname%></h1>
+				<h1 class="btn"><%=link_to "Atsijungti",sessions_logout_path, :method => :delete%></h1>
+			</div>
+        </div>
+        <br>
+        <div id="middle-board" class="row align-items-center">
+            <div id="middle-board-content-1" class="col">              
+				<%params=request.query_parameters%>
+				<%id=params[:dalykas]%>
+                <h1 id="stuff-name"><%=Dalykas.find(id).name%></h1>            
+            </div>
+            <div id="middle-board-content" class="col">
+                <h1 id="middle-board-btn"><%=link_to "Redaguoti", dalykai_dalyka_redaguoti_path(dalykas: id)%></h1>
+                <h1 id="middle-board-btn-1"><%=link_to "Trinti", model_delete_dalykas_path(dalykas: id), :method => :delete%></h1>
+			</div>         
+        </div>
+        <br>
+        <div id="middle-board-2">
+            <h1>Kita informacija</h1>
+            <div class="info-box">
+				<h3>Grupe: <%=Dalykas.find(id).group%></h3>
+                <h3>Kreditai: <%=Dalykas.find(id).credit%></h3>
+				<h3>Kursas: <%=Dalykas.find(id).course%></h3>
+                <h3>Programa: <%=Dalykas.find(id).program%></h3>
+                <h3>Trukmė: <%=Dalykas.find(id).duration_start%> => <%=Dalykas.find(id).duration_end%></h3>
+            </div>
+        </div>
+        <div id="middle-board-3">
+            <h1>Apie dalyką</h1>
+            <div class="info-box">
+                <h3><%=Dalykas.find(id).description%></h3>               
+            </div>
+        </div>
+        <footer id="bottom-board">
+			<address>Modestas Sinkevičius PI17B &copy</address>
+		</footer>
+    </body>
+</html>

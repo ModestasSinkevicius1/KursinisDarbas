@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                background-color: #692121;
+                background-repeat: no-repeat;
+                background-size:cover;                   
+                font-family: Arial, Helvetica, sans-serif;            
+            }
+            div{
+                color: white;                        
+                background-color: rgb(148, 14, 14);
+                border: solid #3b0707;
+                border-radius: 10pt;
+                margin-right:auto;
+                margin-left:auto;            
+                width:300pt;
+                padding: 50pt;
+                padding-bottom:10pt;
+                padding-top:10pt;
+                text-align: center;
+                margin-top: 10em;                            
+            }
+            #nick-label,#pass-label{
+                text-align: left;
+                margin-bottom:2pt;
+            }
+            #nick{
+                margin-bottom:10pt;
+            }
+            #nick,#pass{
+                padding: 2pt;
+                
+            }
+            .btn{
+                padding: 5pt;
+                border-radius: 5pt;
+                margin-left: 5pt;
+                margin-right: 5pt;
+                width: 75pt;
+                background-color: rgb(48, 48, 121);
+                color: white;
+                border-color: rgb(48, 48, 121);
+            }
+            #errors{
+                border:initial;
+                padding:initial;
+                margin:
+            }
+              
+        </style>
+    </head>
+    <body>        
+         <div>
+            <h1>Prisijungimas</h1>
+            <%if flash[:login_errors]%>
+                <% flash[:login_errors].each do |error| %>
+                    <p><%=error%></p>
+                <% end %>
+            <% end %>
+             <form action="sessions/login" method="POST">
+				 <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                 <p id="nick-label">Prisijungimo vardas:</p>
+                 <input type="text" id="nick" name="login[name]">
+                 <br>              
+                 <p id="pass-label">Slaptažodis:</p>
+                 <input type="password" id="pass" name="login[password]">
+                 <br>
+                 <br>
+                 <input type="submit" value="Prisijungti" class="btn">                 
+             </form>
+         </div>     
+    </body>
+</html>

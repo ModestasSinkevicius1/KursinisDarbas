@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 95%;
+                margin-bottom:45pt;			
+            }
+			.btn, .btn-3, .btn-send ,.user, #stuff, #btn-side{
+				font-size:16pt;
+			}
+            #top-board{                                
+                text-align:center;
+                border-radius: 5pt;                              
+            }
+            a, a:hover, a:active{
+                color:black;
+                text-decoration:none;
+            }
+            .btn-3, .btn, .btn-send{
+                background-color: white;
+                margin:5pt;
+                border-radius: 5pt;
+                width: 100pt;
+                min-width:100pt;              
+                text-align: center;
+                padding:1pt;						
+            }
+            .btn-send{
+                width:205pt;
+            }
+			
+            
+            .user-control, .user{
+                color:white;
+                margin-top:4pt;
+                margin-bottom:0;                            
+                font-size:16pt;                              
+            }
+			.user{
+                margin-right:8pt;
+            }
+			.btn a:link, aside a:link{
+				text-decoration:none;			
+			}
+			.col{
+                text-align:right;
+            }                    
+            
+            #middle-board{
+                display: flex;
+                margin-bottom: 10pt;
+            }
+            nav{                          
+                max-width:215pt;               
+                margin-right:5pt;
+                border-radius: 5pt;
+            }
+            aside{                
+                padding: 2pt;
+                flex:2;
+                border-radius: 5pt;
+				color:black;
+            }
+            aside div{                
+                display: flex;
+                flex:1;                                            
+            }
+            #db-top .db-name{
+                background-color: white;
+                margin: 1pt;
+                text-align: center;
+                display: block;
+            }
+            #db-base-1 .db-data, #db-base-3 .db-data{
+                background-color: white;                
+                text-align: center;
+                display: block;
+				margin-top:2pt;
+				color:black;
+            }
+            #db-base-2 .db-data{
+                background-color: lightgray;                
+                text-align: center;
+                display: block;
+            }
+            #news-box{
+                background-color: white;
+                margin:5pt;
+                height: 100pt;
+            }
+            #bottom-board{                
+                display: block;
+                position: fixed;
+                bottom: 0;               
+                text-align: center;
+                width: 100%;
+                padding: 5pt;
+                left:0;                              
+                color: white;
+                font-size: 14pt;           
+            }
+			
+			#btn-side{
+				background-color:white;
+				border-radius:5pt;
+				margin-right:5pt;
+				text-align:center;
+				padding:2pt;	
+				color:black;
+			}		
+            #top-board, #bottom-board, aside div, aside, nav{
+                background-color:#436db0;
+            }
+            header{           
+                text-align: center;              
+                padding: 5pt;
+            }   
+            #news,#stuff{
+                padding-left: 5pt;
+            }
+            .btn:hover{
+                background-color:lightgray;
+            }
+            textarea{
+                resize:none;
+                margin:5pt;
+            }
+            #side #stuff-name{                              
+                justify-content:left;                             
+            }
+            #side #stuff-side{
+                justify-content:right;
+            }
+            #side #stuff-side, #side #stuff-name{              
+                text-align:center;              
+                margin:0;                        
+            }
+            #stuff-side{               
+                margin-left:200pt;               
+            }                               
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1><%=link_to "STUDENTŲ ŽINIOS", dalykai_dalykai_destytojas_path%></h1>
+        </header>
+        <div id="top-board">        
+            <div class="row" id="top-board">
+                <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12">
+                            
+                </div>
+                <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12">
+                        
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                    <div>				
+                        <h1 class="user"><%=Destytojas.find(session[:role_id]).name%> <%=Destytojas.find(session[:role_id]).surname%></h1>
+                        <h1 class="btn" id="user-right"><%=link_to "Atsijungti",sessions_logout_path, :method => :delete%></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="middle-board">        
+            <nav>
+                <h1 id="news">Naujienos</h1>               
+                <% News.all.each do |dalykas| %>           
+                    <div id="news-box">
+                        <b>User:</b> <%=dalykas.user%><br>
+                        <b>Email:</b> <%=dalykas.email%><br>
+                        <b>Date:</b> <%=dalykas.date%><br>
+                        <b>Žinutė:</b><br>
+                        <%=dalykas.description%>
+                    </div>                   
+                <% end %>          
+                <hr>
+            </nav>
+            <aside>
+                <div id="side">
+                    <div id="stuff-name" class="col-6">
+                        <h1>Dalykai</h1>
+                    </div>
+                    <div id="stuff-side" class="col-6">
+                        <h1 class="btn-3"><%=link_to dalykai_dalyka_kurti_path do%>Kurti nauja <br> dalyka<%end%></h1>
+                    </div>                   
+				</div>
+                <div id="db-top">
+                    <div class="db-name">
+                        ID
+                    </div>
+                    <div class="db-name">
+                        Dalykas
+                    </div>                   
+                    <div class="db-name">
+                        Dėstytojas/a
+                    </div>
+                    <div class="db-name">
+                        Kursas
+                    </div>
+                    <div class="db-name">
+                        Kreditai
+                    </div>                    
+                </div>                				 
+				<% Dalykas.all.each do |dalykas| %>
+				<%= link_to dalykai_dalykas_destytojas_path("dalykas" => dalykas.id)  do%>
+				<div id="db-base-1">
+					 <div class="db-data"><%= dalykas.id%></div>
+					 <div class="db-data"><%= dalykas.name%></div>					 
+					 <div class="db-data"><%= dalykas.lecturer%></div>
+					 <div class="db-data"><%= dalykas.course%></div>
+					 <div class="db-data"><%= dalykas.credit%></div>
+				</div>
+				<% end%>
+				 <% end %>
+
+                
+            </aside>        
+        </div>
+        <footer id="bottom-board">
+			<address>Modestas Sinkevičius PI17B &copy</address>
+		</footer>
+    </body>
+</html>

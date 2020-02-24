@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                background-color: #2d5f91;
+                background-repeat: no-repeat;
+                background-size:cover;
+                height: 29em;   
+                font-family: Arial, Helvetica, sans-serif;            
+            }
+            div{
+                color: white;                        
+                background-color: #436db0;
+                border: solid #162d45;
+                border-radius: 10pt;
+                margin-right:auto;
+                margin-left:auto;            
+                width:350pt;
+                padding: 50pt;
+                padding-bottom:10pt;
+                padding-top:10pt;
+                text-align: center;
+                margin-top: 2em;                           
+            }
+            a, a:hover, a:active{
+                color:black;
+                text-decoration:none;
+            }
+            .label{
+                text-align: left;			
+            }
+            #input,#input-date,#input-textarea{
+                padding: 2pt;
+                padding-right:90pt;
+                padding-leftt:90pt;
+                border-radius:5pt;
+                margin-bottom:5pt;            
+            }
+            #input-date{
+                padding-right:150pt;
+                border-radius:5pt;
+                margin-bottom:5pt;
+            }
+            #input-textarea{
+                resize:none;
+            }
+			#input-combo-1{
+				padding: 5pt;
+                padding-right: 205pt;
+                border-radius: 5pt;
+                margin-bottom:5pt;              				
+			}
+			#input-combo{
+				padding: 5pt;                
+                padding-right: 210pt;
+                border-radius: 5pt;
+                margin-bottom:5pt;				
+			}
+			#input-combo-2{
+				padding: 5pt;                
+                padding-right: 186pt;
+                border-radius: 5pt;
+                margin-bottom:5pt;				
+            }
+            #back-btn{
+                background-color:white;                
+                border-radius:5pt;
+                margin:10pt 0 0 10pt;
+                width:85pt;
+                padding:2pt;
+                text-align:center;
+                font-size:16pt;
+            }        
+        </style>
+    </head>
+    <body>
+         <%params=request.query_parameters%>
+         <%id=params[:dalykas]%>
+         <h1 id="back-btn"><%=link_to "Atgal", session[:back_second]%></h1>        
+         <div>
+			<h1>Dalyko redagavimas</h1>
+             <form action = "/model/edit_dalykas" method="POST">
+				 <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                 <p class="label">ID:</p>
+                 <input type="text" id="input" name="primary_key" value=<%=Dalykas.find(id).id%> readonly>  
+                 <br>
+                 <p class="label">Pavadinimas:</p>
+                 <input type="text" id="input" name="dalykas[name]" value=<%=Dalykas.find(id).name%>>  
+                 <br>
+                 <p class="label">Programa:</p>
+                 <input type="text" id="input" name="dalykas[program]" value=<%=Dalykas.find(id).program%>>
+                 <br>
+                 <p class="label">Destytojas:</p>
+                 <input type="text" id="input" name="dalykas[lecturer]" value=<%=Dalykas.find(id).lecturer%>>
+                 <br>
+				 <p class="label">Kursas:</p>
+				 <select id="input-combo" name="dalykas[course]" value=<%=Dalykas.find(id).course%>>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				 </select>	
+                 <br>
+				 <p class="label">Kreditai:</p>
+				 <select id="input-combo" name="dalykas[credit]" value=<%=Dalykas.find(id).credit%>>
+					<option value="1">3</option>
+					<option value="2">6</option>
+					<option value="3">12</option>
+				 </select>
+                 <br>
+				 <p class="label">Grupe:</p>
+                 <select id="input-combo-2" name="dalykas[group]" value=<%=Dalykas.find(id).group%>>
+					<option value="PI17B">PI17B</option>
+					<option value="K16S">K16S</option>
+					<option value="PI16C">PI16C</option>
+					<option value="IS17B">IS17B</option>
+				 </select>          		            
+                 <br>
+                 <p class="label">Pradzia:</p>
+                 <input type="date" id="input-date" name="dalykas[duration_start]" value=<%=Dalykas.find(id).duration_start%>>
+                 <br>
+                 <p class="label">Pabaiga:</p>
+                 <input type="date" id="input-date" name="dalykas[duration_end]" value=<%=Dalykas.find(id).duration_end%>>
+                 <br>
+                 <p class="label">Kita informacija:</p>               
+                 <textarea id="input-textarea" name="dalykas[description]" rows="5" cols="19"><%=Dalykas.find(id).description%></textarea>
+                 <br>
+                 <br>
+                 <input type="submit" value="Patvirtinti" class="btn">                 
+                 
+             </form>
+         </div>     
+    </body>
+</html>

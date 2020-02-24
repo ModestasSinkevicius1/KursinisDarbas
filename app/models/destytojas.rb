@@ -1,0 +1,2 @@
+class Destytojas < ApplicationRecord
+end

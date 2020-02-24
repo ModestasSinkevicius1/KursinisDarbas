@@ -1,0 +1,2 @@
+class Dalykas < ApplicationRecord
+end
