@@ -176,7 +176,7 @@
         <div id="middle-board">        
             <nav>
                 <h1 id="news">Naujienos</h1>               
-                <% News.all.each do |dalykas| %>           
+                <% News.all.reverse.each do |dalykas| %>           
                     <div id="news-box">
                         <b>User:</b> <%=dalykas.user%><br>
                         <b>Email:</b> <%=dalykas.email%><br>
